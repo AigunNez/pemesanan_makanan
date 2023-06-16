@@ -1,0 +1,57 @@
+<!-- <header class="header clearfix element_to_stick">
+    <div class="container">
+        <div id="logo">
+            <a href="{{ url_for('main')}}">
+                <img src="{{ url_for('static', filename='img/logo.svg')}}" width="162" height="35" alt=""
+                    class="logo_normal">
+                <img src="{{ url_for('static', filename='img/logo_sticky.svg')}}" width="162" height="35" alt=""
+                    class="logo_sticky">
+            </a>
+        </div>
+        <div class="layer"></div>
+        <a href="#0" class="open_close">
+            <i class="icon_menu"></i><span>Menu</span>
+        </a>
+        <nav class="main-menu">
+            <div id="header_menu">
+                <a href="#0" class="open_close">
+                    <i class="icon_close"></i><span>Menu</span>
+                </a>
+                <a href="index.html"><img src="{{ url_for('static', filename='img/logo.svg')}}" width="162" height="35"
+                        alt=""></a>
+            </div>
+            <ul>
+                <li><a href="{{ url_for('main') }}">Home</a></li>
+                <li><a href="{{ url_for('menu') }}">Menu</a></li>
+                <li><a href="{{ url_for('pembayaran') }}">Pembayaran</a></li>
+            </ul>
+        </nav>
+    </div>
+</header> -->
+<header class="header_in clearfix">
+    <div class="container">
+        <div id="logo">
+            <a href="{{ url_for('main') }}">
+                <img src="{{ url_for('static', filename='img/logo_sticky.svg')}}" width="140" height="35" alt="">
+            </a>
+        </div>
+        <div class="layer"></div>
+        <a href="#0" class="open_close">
+            <i class="icon_menu"></i><span>Menu</span>
+        </a>
+        <nav class="main-menu">
+            <div id="header_menu">
+                <a href="#0" class="open_close">
+                    <i class="icon_close"></i><span>Menu</span>
+                </a>
+                <a href="{{ url_for('main') }}"><img src="{{ url_for('static', filename='img/logo.svg')}}" width="162"
+                        height="35" alt=""></a>
+            </div>
+            <ul>
+                <li><a href="{{ url_for('main') }}">Home</a></li>
+                <li><a href="{{ url_for('menu') }}">Menu</a></li>
+                <li><a href="{{ url_for('pembayaran') }}">Pembayaran</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>

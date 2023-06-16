@@ -1,0 +1,128 @@
+{% extends "index.html" %}
+
+{% block content %}
+<main class="bg_gray">
+    <div class="container margin_60_20">
+        <form method="post" action="{{ url_for('struk')}}">
+            <div class="row justify-content-center">
+                <div class="col-xl-6 col-lg-8">
+                    <div class="box_order_form">
+                        <div class="head">
+                            <div class="title">
+                                <h3>Detail Informasi</h3>
+                            </div>
+                        </div>
+                        <!-- /head -->
+                        <div class="main">
+                            <div class="form-group">
+                                <label>Nama Depan dan Nama Belakang</label>
+                                <input required name="nama_lengkap" class="form-control" placeholder="Nama Lengkap">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /box_order_form -->
+                    <div class="box_order_form">
+                        <div class="head">
+                            <div class="title">
+                                <h3>Metode Pembayaran</h3>
+                            </div>
+                        </div>
+                        <!-- /head -->
+                        <div class="main">
+                            <div class="payment_select">
+                                <label class="container_radio">Bayar dengan Kartu Kredit
+                                    <input type="radio" value=" " checked name="payment_method">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <i class="icon_creditcard"></i>
+                            </div>
+                            <div id="kartu_kredit">
+                                <div class="form-group">
+                                    <label>Nama pada Kartu Kredit</label>
+                                    <input required type="text" class="form-control" id="name_card_order" name="name_card_order"
+                                        placeholder="Nama">
+                                </div>
+                                <div class="form-group">
+                                    <label>Nomor Kartu Kredit</label>
+                                    <input required type="text" id="card_number" name="card_number" class="form-control" placeholder="Nomor">
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Tanggal Kadaluarsa</label>
+                                        <div class="row">
+                                            <div class="col-md-6 col-6">
+                                                <div class="form-group">
+                                                    <input required type="text" id="expire_month" name="expire_month" class="form-control" placeholder="mm">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6 col-6">
+                                                <div class="form-group">
+                                                    <input required type="text" id="expire_year" name="expire_year" class="form-control" placeholder="yyyy">
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="payment_select">
+                                <label class="container_radio">Bayar dengan Uang Tunai
+                                    <input type="radio" value="" name="payment_method">
+                                    <span class="checkmark"></span>
+                                </label>
+                                <i class="icon_wallet"></i>
+                            </div>
+                            <div id="jumlah_bayar" style="display:none;">
+                                <div class="form-group">
+                                    <label>Jumlah Pembayaran</label>
+                                    <input type="number" id="total_bayar" name="jumlah_bayar" class="form-control" placeholder="Jumlah Pembayaran">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /box_order_form -->
+                </div>
+                <!-- /col -->
+                <div class="col-xl-4 col-lg-4" id="sidebar_fixed">
+                    <div class="box_order">
+                        <div class="head">
+                            <h3>Daftar Pembayaran</h3>
+                        </div>
+                        <!-- /head -->
+                        <div class="main">
+                            <ul>
+                                <li>Tanggal<span>{{waktu}}</span></li>
+                                <li>Hour<span>{{jam}}</span></li>
+                            </ul>
+                            <hr>
+                            <ul class="clearfix">
+                                {% for pesanan in dataPesanan %}
+                                    <li>
+                                        <form action="" method="post">
+                                            <input type="hidden" name="namaHapus" value="{{pesanan[0]}}">
+                                            <button name="hapusPesanan" style="background: none;border: none">
+                                                <a>{{pesanan[1]}}x {{pesanan[0]}}</a>
+                                            </button>
+                                            <span>Rp{{pesanan[2]}}</span>
+                                        </form>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+
+                            <ul class="clearfix">
+                                <li>Subtotal<span>Rp{{subTotal}}</span></li>
+                                <li>Diskon<span>Rp{{diskon}}</span></li>
+                                <li>Biaya Layanan<span>Rp1000</span></li>
+                                <li class="total">Total<span>Rp{{total}}</span></li>
+                            </ul>
+                            <input type="submit" class="btn_1 gradient full-width mb_5" value="Bayar">
+                            <div class="text-center"><small>Or Call Us at <strong>+62 882-9731-5157</strong></small></div>
+                        </div>
+                    </div>
+                    <!-- /box_booking -->
+                </div>
+            </div>      
+        </form>
+        <!-- /row -->
+    </div>
+</main>
+{% endblock %}

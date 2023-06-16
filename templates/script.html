@@ -1,0 +1,63 @@
+<!-- COMMON SCRIPTS -->
+<script src="{{ url_for('static', filename='js/common_scripts.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/common_func.js')}}"></script>
+<script src="{{ url_for('static', filename='assets/validate.js')}}"></script>
+
+<!-- SPECIFIC SCRIPTS -->
+<script src="{{ url_for('static', filename='js/jarallax.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/jarallax-video.min.js')}}"></script>
+
+<!-- SPECIFIC SCRIPTS -->
+<script src="{{ url_for('static', filename='js/sticky_sidebar.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/sticky-kit.min.js')}}"></script>
+<script src="{{ url_for('static', filename='js/specific_detail.js')}}"></script>
+<script>
+    $('#sidebar_fixed').theiaStickySidebar({
+        minWidth: 991,
+        updateSidebarHeight: false,
+        additionalMarginTop: 30
+    });
+</script>
+<script>
+    // Ambil referensi elemen-elemen yang diperlukan
+    var radioCreditCard = document.querySelector('input[value=" "][name="payment_method"]');
+    var radioCash = document.querySelector('input[value=""][name="payment_method"]');
+    var kartuKredit = document.getElementById('kartu_kredit');
+    var jumlahBayar = document.getElementById('jumlah_bayar');
+
+    var namaKartu = document.getElementById('name_card_order');
+    var nomorKartu = document.getElementById('card_number');
+    var kadaluarsaBulan = document.getElementById('expire_month');
+    var kadaluarsaTahun = document.getElementById('expire_year');
+    var totalBayar = document.getElementById('total_bayar');
+
+    // Tambahkan event listener untuk radio pertama (Credit Card)
+    radioCreditCard.addEventListener('change', function () {
+        if (this.checked) {
+            totalBayar.removeAttribute('required');
+            namaKartu.setAttribute('required', '');
+            nomorKartu.setAttribute('required', '');
+            kadaluarsaBulan.setAttribute('required', '');
+            kadaluarsaTahun.setAttribute('required', '');
+
+            kartuKredit.style.display = 'block';
+            jumlahBayar.style.display = 'none';
+        }
+    });
+
+    // Tambahkan event listener untuk radio kedua (Cash)
+    radioCash.addEventListener('change', function () {
+        if (this.checked) {
+            totalBayar.setAttribute('required', '');
+            namaKartu.removeAttribute('required');
+            nomorKartu.removeAttribute('required');
+            kadaluarsaBulan.removeAttribute('required');
+            kadaluarsaTahun.removeAttribute('required');
+            
+            namaKartu.value = "";
+
+            kartuKredit.style.display = 'none';
+            jumlahBayar.style.display = 'block';
+        }
+    });
+</script>

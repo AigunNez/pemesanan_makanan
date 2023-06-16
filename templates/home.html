@@ -1,0 +1,203 @@
+{% extends "index.html" %}
+
+{% block content %}
+
+<main>
+    <div class="hero_single jarallax"
+        data-jarallax-video="mp4:{{ url_for('static', filename='./video/intro.mp4')}},webm:{{ url_for('static', filename='./video/intro.webm')}},ogv:{{ url_for('static', filename='./video/intro.ogv')}}">
+        <div class="opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.6)">
+            <div class="container">
+                <div class="row justify-content-lg-start justify-content-md-center">
+                    <div class="col-xl-7 col-lg-8">
+                        <h1>Pesan dan Nikmati Makananmu</h1>
+                        <p>Makanan Terbaik dengan Harga Terbaik</p>
+                        <form method="post" action="{{ url_for('menu') }}">
+                            <div class="row g-0 custom-search-input">
+                                <div class="col-lg-10">
+                                    <div class="form-group">
+                                        <input name="kategori2" class="form-control no_border_r" type="text" id="autocomplete"
+                                            placeholder="Kategori Makanan">
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <button name="filter" class="btn_1 gradient" type="submit">Cari</button>
+                                </div>
+                            </div>
+                            <!-- /row -->
+                            <div class="search_trends white">
+                                <h5>Contoh:</h5>
+                                <ul>
+                                    <li><a href="#0">Aneka Nasi,</a></li>
+                                    <li><a href="#0">Western,</a></li>
+                                    <li><a href="#0">Seafood,</a></li>
+                                    <li><a href="#0">Camilan</a></li>
+                                </ul>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- /row -->
+            </div>
+        </div>
+        <div class="wave hero"></div>
+    </div>
+    <!-- /hero_single -->
+
+    <div class="container margin_30_60">
+        <div class="main_title center">
+            <span><em></em></span>
+            <h2>Jenis Makanan</h2>
+            <p>Beberapa jenis jenis makanan yang tersedia dengan berbagai variasi makanan</p>
+        </div>
+        <!-- /main_title -->
+
+        <div class="owl-carousel owl-theme categories_carousel">
+            {% for kategori in dataKategori %}
+                {% if loop.index <= 10 %}
+                    <div class="item_version_2">
+                        <a href="grid-listing-filterscol.html">
+                            <figure>
+                                <span>{{ kategori[3] }}</span>
+                                <img src="{{ url_for('static', filename='img/makanan/')}}{{kategori[2]}}" data-src="{{ url_for('static', filename='img/makanan/')}}{{kategori[2]}}" alt=""
+                                    class="owl-lazy" width="350" height="450">
+                                <div class="info">
+                                    <h3>{{ kategori[0]}}</h3>
+                                    <small>Harga Kisaran Rp{{kategori[1]}}</small>
+                                </div>
+                            </figure>
+                        </a>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <!-- /carousel -->
+    </div>
+    <!-- /container -->
+
+    <div class="bg_gray">
+        <div class="container margin_60_40">
+            <div class="main_title">
+                <span><em></em></span>
+                <h2>Makanan</h2>
+                <p>Beberapa makanan yang tersedia yang dapat dipesan pelanggan</p>
+                <a href="{{ url_for('menu') }}">Lihat Semuanya &rarr;</a>
+            </div>
+            <div class="row add_bottom_25">
+                <div class="col-lg-6">
+                    <div class="list_home">
+                        <ul>
+                            {% for menu in menuMakanan1 %}
+                            <li>
+                                <a href="{{ url_for('menu')}}">
+                                    <figure>
+                                        <img src="{{ url_for('static', filename='img/makanan/')}}{{menu[4]}}"
+                                            data-src="{{ url_for('static', filename='img/makanan/')}}{{menu[4]}}" alt="" class="lazy" width="350"
+                                            height="233">
+                                    </figure>
+                                    <em>{{ menu[1] }}</em>
+                                    <h3>{{ menu[0] }}</h3>
+                                    <small>Terjual sebanyak 5 kali</small>
+                                    <ul>
+                                        <li><span class="ribbon off">{{ menu[3]}}%</span></li>
+                                        <li>Rp{{ menu[2] }}</li>
+                                    </ul>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="list_home">
+                        <ul>
+                            {% for menu in menuMakanan2 %}
+                            <li>
+                                <a href="{{ url_for('menu')}}">
+                                    <figure>
+                                        <img src="{{ url_for('static', filename='img/makanan/')}}{{menu[4]}}" data-src="{{ url_for('static', filename='img/makanan/')}}{{menu[4]}}"
+                                            alt="" class="lazy" width="350" height="233">
+                                    </figure>
+                                    <em>{{ menu[1] }}</em>
+                                    <h3>{{ menu[0] }}</h3>
+                                    <small>Terjual sebanyak 5 kali</small>
+                                    <ul>
+                                        <li><span class="ribbon off">{{ menu[3]}}%</span></li>
+                                        <li>Rp{{ menu[2] }}</li>
+                                    </ul>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+            <div class="banner lazy" data-bg="url({{ url_for('static', filename='img/banner_bg_desktop2.jpeg')}})">
+                <div class="wrapper d-flex align-items-center opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.3)">
+                    <div>
+                        <small>PESAN MAKANANMU</small>
+                        <h3>Kami Akan Melayani dengan Layanan Terbaik</h3>
+                        <p>Nikmati Makananmu dalam beberapa menit!</p>
+                        <a href="{{ url_for('menu')}}" class="btn_1 gradient">Pesan Sekarang!</a>
+                    </div>
+                </div>
+                <!-- /wrapper -->
+            </div>
+            <!-- /banner -->
+        </div>
+    </div>
+    <!-- /bg_gray -->
+
+    <div class="shape_element_2">
+        <div class="container margin_60_0">
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="box_how">
+                                <figure><img src="img/lazy-placeholder-100-100-white.png" data-src="{{url_for('static', filename='img/how_1.svg')}}"
+                                        alt="" width="150" height="167" class="lazy"></figure>
+                                <h3>Pesan dengan Mudah </h3>
+                                <p>Kemudahan Terjamin! Temukan kemudahan dalam setiap langkahnya dengan layanan kami yang cepat dan efisien. Dengan hanya beberapa ketukan
+                                jari, pesanan Anda akan tiba.</p>
+                            </div>
+                            <div class="box_how">
+                                <figure><img src="img/lazy-placeholder-100-100-white.png" data-src="{{url_for('static', filename='img/how_2.svg')}}"
+                                        alt="" width="130" height="145" class="lazy"></figure>
+                                <h3>Layanan yang Cepat</h3>
+                                <p>Nikmati layanan cepat kami, rasakan kelezatan makanan dan minuman dalam sekejap!</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-6 align-self-center">
+                            <div class="box_how">
+                                <figure><img src="img/lazy-placeholder-100-100-white.png" data-src="{{url_for('static', filename='img/how_3.svg')}}"
+                                        alt="" width="150" height="132" class="lazy"></figure>
+                                <h3>Nikmati Makanan</h3>
+                                <p>Temukan kelezatan sejati hidangan dengan kami! Nikmati makanan lezat dengan berbagai menu makanan
+                                dalam hitungan menit.</p>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-center mt-3 d-block d-lg-none"><a href="{{ url_for('menu') }}"
+                            class="btn_1 medium gradient pulse_bt mt-2">Pesan</a></p>
+                </div>
+                <div class="col-lg-5 offset-lg-1 align-self-center">
+                    <div class="intro_txt">
+                        <div class="main_title">
+                            <span><em></em></span>
+                            <h2>Pesan Makanan Sekarang</h2>
+                        </div>
+                        <p class="lead">Puaskan rasa laparmu dengan memakan makanan sekarang! Kenyangkan perutmu dengan hidangan lezat hanya dalam
+                        beberapa klik.</p>
+                        <p>Pesan makanan sekarang dan nikmati hidangan favoritmu dengan mudah!.</p>
+                        <p><a href="{{ url_for('menu') }}" class="btn_1 medium gradient pulse_bt mt-2">Pesan</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- /shape_element_2 -->
+
+</main>
+<!-- /main -->
+{% endblock %}

@@ -1,0 +1,208 @@
+{% extends "index.html" %}
+
+{% block content %}
+<main>
+    <div class="">
+        <div class="container margin_detail">
+            <div class="row">
+                <div class="col-lg-8 list_menu">
+                    <div class="filters_full clearfix add_bottom_15">
+                        <div class="container">
+                            <div class="type_delivery">
+                                <ul class="clearfix">
+                                    <li>
+                                        <label class="container_radio">Filter
+                                            <input type="radio" name="type_d" value="all" id="all" checked data-filter="*" class="selected">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                    </li>
+                                </ul>
+                            </div>
+                            <a href="#collapseFilters" data-bs-toggle="collapse" class="btn_filters"><i
+                                    class="icon_adjust-vert"></i><span>Filters</span></a>
+                        </div>
+                    </div>
+                    
+                    <div class="collapse filters_2" id="collapseFilters">
+                        <div class="container margin_30_20">
+                            <form action="" method="post">
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <div class="filter_type">
+                                            <h6>Kategori Makanan</h6>
+                                            <ul>
+                                                {% for kategori in kategori1 %}
+                                                <li>
+                                                    <label class="container_check">{{ kategori[0]}} <small>{{ kategori[3]}}</small>
+                                                        <input type="checkbox" name="kategori" value="{{ kategori[0] }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="filter_type">
+                                            <h6>&nbsp;</h6>
+                                            <ul>
+                                                {% for kategori in kategori2 %}
+                                                <li>
+                                                    <label class="container_check">{{ kategori[0]}} <small>{{ kategori[3]}}</small>
+                                                        <input type="checkbox" name="kategori" value="{{ kategori[0] }}">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="filter_type">
+                                            <h6>Diskon</h6>
+                                            <ul>
+                                                <li>
+                                                    <label class="container_check">0% - 5%
+                                                        <input type="checkbox" name="diskon" value="0">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="container_check">6% - 10%
+                                                        <input type="checkbox" name="diskon" value="6">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="container_check">11% - 15%
+                                                        <input type="checkbox" name="diskon" value="11">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+                                                <li>
+                                                    <label class="container_check">16% - 20%
+                                                        <input type="checkbox" name="diskon" value="16">
+                                                        <span class="checkmark"></span>
+                                                    </label>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4"></div>
+                                    <div class="col-md-4">
+                                        <input name="filter" type="submit" class="btn_1 full-width" style="float:right; " value="Filter">
+                                    </div>
+                                </div>
+                            </form>
+                            <!-- /row -->
+                        </div>
+                    </div>
+                    <!-- /filters -->
+                    <div class="container margin_30_20">
+                    
+                        <div class="promo mb_30">
+                            <h3>Nikmati makanan lezat kami dengan memesan makanan sekarang dan nikmati pelayanan dan kenyamanan terbaik!</h3>
+                            <p>Rasakan kenikmatan kuliner dengan memesan makananan. Cepat, praktis, dan lezat.</p>
+                            <i class="icon-food_icon_delivery"></i>
+                        </div>
+                        <!-- /promo -->
+                    
+                        <div class="row isotope-wrapper">
+                            {% for makanan in menuMakanan %}
+                                <div class="col-xl-4 col-lg-6 col-md-6 col-sm-6 isotope-item delivery">
+                                    <div class="strip">
+                                        <figure>
+                                            <span class="ribbon off">{{ makanan[3]}}%</span>
+                                            <img src="{{ url_for('static', filename='img/makanan/')}}{{ makanan[4] }}" data-src="{{ url_for('static', filename='img/makanan/')}}{{ makanan[4] }}" class="img-fluid lazy" alt="">
+                                            <a href="#modal-dialog{{loop.index}}" class="strip_info modal_dialog">
+                                                <small>{{ makanan[1] }}</small>
+                                                <div class="item_title">
+                                                    <h3>{{ makanan[0] }}</h3>
+                                                    <small>{{ makanan[5] }}</small>
+                                                </div>
+                                            </a>
+                                        </figure>
+                                        <ul>
+                                        </ul>
+                                    </div>
+                                </div>
+                                <!-- Modal item order -->
+                                <div id="modal-dialog{{loop.index}}" class="zoom-anim-dialog mfp-hide dataMakanan">
+                                    <div class="small-dialog-header">
+                                        <h3>{{ makanan[0] }}</h3>
+                                    </div>
+                                    <div class="content">
+                                        <form action="" method="post">
+                                            <div style="width:50%; height:50%; margin:auto">
+                                                <img src="{{ url_for('static', filename='img/makanan/')}}{{ makanan[4]}}" width="100%">
+                                            </div>
+                                            <br>
+                                            <p>{{ makanan[6] }}</p>
+                                            <h6>Jumlah</h6>
+                                            <div class="numbers-row">
+                                                <input name="jumlah" type="text" value="1" id="qty_1" class="qty2 form-control" name="quantity">
+                                            </div>
+                                            <input name="nama" type="hidden" value="{{ makanan[0] }}">
+                                            <div class="row small-gutters">
+                                                <div class="col-md-12">
+                                                    <button name="tambahPesanan" type="submit" class="btn_1 full-width">Tambahkan Pesanan</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+                <!-- /col -->
+                <div class="col-lg-4" id="sidebar_fixed">
+                    <div class="box_order mobile_fixed">
+                        <div class="head">
+                            <h3>Daftar Pesanan</h3>
+                            <a href="#0" class="close_panel_mobile"><i class="icon_close"></i></a>
+                        </div>
+                        <!-- /head -->
+                        <div class="main">
+                            <ul class="clearfix">
+                                {% for pesanan in dataPesanan %}
+                                    <li>
+                                        <form action="" method="post">
+                                            <input type="hidden" name="namaHapus" value="{{pesanan[0]}}">
+                                            <button name="hapusPesanan" style="background: none;border: none">
+                                                <a>{{pesanan[1]}}x {{pesanan[0]}}</a>
+                                            </button>
+                                            <span>Rp{{pesanan[2]}}</span>
+                                        </form>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                            <ul class="clearfix">
+                                <li>Subtotal<span>Rp{{subTotal}}</span></li>
+                                <li>Diskon<span>Rp{{diskon}}</span></li>
+                                <li>Biaya Layanan<span>Rp1000</span></li>
+                                <li class="total">Total<span>Rp{{total}}</span></li>
+                            </ul>
+                            <!-- /dropdown -->
+                            <div class="btn_1_mobile">
+                                <a href="{{ url_for('pembayaran')}}" class="btn_1 gradient full-width mb_5">Order Now</a>
+                                <div class="text-center"><small>Tidak ada uang yang diambil pada tahap ini</small></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /box_order -->
+                    <div class="btn_reserve_fixed"><a href="#0" class="btn_1 gradient full-width">View Basket</a>
+                    </div>
+                </div>
+            </div>
+            <!-- /row -->
+        </div>
+        <!-- /container -->
+    </div>
+    <!-- /bg_gray -->
+
+</main>
+<!-- /main -->
+
+{% endblock %}

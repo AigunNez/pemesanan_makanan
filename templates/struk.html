@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="Muhammad Mahdy Al Akbar">
+    <title>FooYes</title>
+    <!-- Favicons-->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="apple-touch-icon" type="image/x-icon" href="img/apple-touch-icon-57x57-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="72x72" href="img/apple-touch-icon-72x72-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="114x114"
+        href="img/apple-touch-icon-114x114-precomposed.png">
+    <link rel="apple-touch-icon" type="image/x-icon" sizes="144x144"
+        href="img/apple-touch-icon-144x144-precomposed.png">
+    <!-- Bootstrap core CSS-->
+    <link href="{{ url_for('static', filename='struk/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <!-- Main styles -->
+    <link href="{{ url_for('static', filename='struk/css/admin.css')}}" rel="stylesheet">
+    <!-- Icon fonts-->
+    <link href="{{ url_for('static', filename='struk/vendor/font-awesome/css/font-awesome.min.css')}}" rel="stylesheet" type="text/css">
+    <!-- Plugin styles -->
+    <link href="{{ url_for('static', filename='struk/vendor/datatables/dataTables.bootstrap4.css')}}" rel="stylesheet">
+    <!-- Your custom styles -->
+    <link href="{{ url_for('static', filename='struk/css/custom.css')}}" rel="stylesheet">
+    <style>
+        .invoice-title h2,
+        .invoice-title h3 {
+            display: inline-block;
+        }
+
+        .table>tbody>tr>.no-line {
+            border-top: none;
+        }
+
+        .table>thead>tr>.no-line {
+            border-bottom: none;
+        }
+
+        .table>tbody>tr>.thick-line {
+            border-top: 2px solid;
+        }
+
+        @media print {
+            a.btn_1 {
+                display: none;
+                opacity: 0;
+                visibility: hidden;
+                height: 0;
+            }
+        }
+    </style>
+</head>
+
+<body style="background-color: #fff">
+    <div class="container">
+        <div class="row">
+            <p class="text-center pt-5"><a href="{{url_for('menu')}}" class="btn_1 gray"><i class="fa fa-fw fa-arrow-left"></i>
+                    Kembali</a></p>&nbsp;
+            <p class="text-center pt-5"><a href="javascript:window.print()" class="btn_1 gray"><i class="fa fa-fw fa-print"></i>
+                    Print Struk ini</a></p>
+        </div>
+        
+        <div class="row">
+            <div class="col-12">
+                <div class="invoice-title pt-4">
+                    <h3>Struk</h3>
+                    <h3 class="float-right">Pesanan #{{kodeUnik}}</h3>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-6">
+                        <address>
+                            <strong>Pembeli:</strong><br>
+                            {{ nama }}
+                        </address>
+                    </div>
+                    <div class="col-6 text-right">
+                        <address>
+                            <strong>Penjual:</strong><br>
+                            FooYes<br>
+                            +62 882-9731-5157<br>
+                            FooYes@gmail.com<br>
+                            Surabaya, Jl. Ketintang
+                        </address>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-6">
+                        <address>
+                            <strong>Metode Pembayaran:</strong><br>
+                            {{ metodePembayaran }}<br>
+                        </address>
+                    </div>
+                    <div class="col-6 text-right">
+                        <address>
+                            <strong>Tanggal Pesanan:</strong><br>
+                            {{ waktu }}<br><br>
+                        </address>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="pt-4">
+                    <h5><strong>Daftar Pesanan</strong></h5>
+                    <div class="table-responsive">
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <td><strong>Nama Makanan</strong></td>
+                                    <td class="text-center"><strong>Harga</strong></td>
+                                    <td class="text-center"><strong>Jumlah</strong></td>
+                                    <td class="text-right"><strong>Totals</strong></td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for pesanan in dataPesanan %}
+                                    <tr>
+                                        <td>{{ pesanan[0] }}</td>
+                                        <td class="text-center">Rp{{ pesanan[3] }}</td>
+                                        <td class="text-center">{{ pesanan[1] }}</td>
+                                        <td class="text-right">Rp{{ pesanan[2] }}</td>
+                                    </tr>
+                                {% endfor %}
+                                <tr>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line"></td>
+                                    <td class="thick-line text-center"><strong>Subtotal</strong></td>
+                                    <td class="thick-line text-right">Rp{{subTotal}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Diskon</strong></td>
+                                    <td class="no-line text-right">Rp{{diskon}}</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Biaya Layanan</strong></td>
+                                    <td class="no-line text-right">Rp1000</td>
+                                </tr>
+                                <tr>
+                                    <td class="no-line"></td>
+                                    <td class="no-line"></td>
+                                    <td class="no-line text-center"><strong>Total</strong></td>
+                                    <td class="no-line text-right">Rp{{total}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
